@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row" id="menu">
+            <div class="col-md-4">
+                <div class="card" onclick="showDetails('amazon')">
+                    <div class="card-header bg-primary text-white">VIP 1</div>
+                    <div class="card-body text-center">
+                        <img src="amazon.png" alt="Amazon" class="card-img-top" style="width: 50px; height: 50px;">
+                        <h5 class="card-title">Amazon</h5>
+                        <p class="card-text">Available balance: ≥20USDT<br>Commissions: 4%</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="card" onclick="showDetails('alibaba')">
+                    <div class="card-header bg-warning text-white">VIP 2</div>
+                    <div class="card-body text-center">
+                        <img src="alibaba.png" alt="Alibaba" class="card-img-top" style="width: 50px; height: 50px;">
+                        <h5 class="card-title">Alibaba</h5>
+                        <p class="card-text">Available balance: ≥499USDT<br>Commissions: 8%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" onclick="showDetails('aliexpress')">
+                    <div class="card-header bg-danger text-white">VIP 3</div>
+                    <div class="card-body text-center">
+                        <img src="aliexpress.png" alt="AliExpress" class="card-img-top"
+                            style="width: 50px; height: 50px;">
+                        <h5 class="card-title">AliExpress</h5>
+                        <p class="card-text">Available balance: ≥899USDT<br>Commissions: 12%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="details" class="d-none">
+            <button class="btn btn-secondary mb-3" onclick="hideDetails()">Back</button>
+            <div id="details-content" class="card p-3"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="orderModal">
+        <div class="showOrderConfirmation">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <iframe src="order.html" frameborder="0"></iframe>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

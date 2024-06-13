@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #74EBD5 0%, #9FACE6 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            width: 200px;
+            border: 10px solid #007bff;
+            border-radius: 50%;
+            margin: 20px auto;
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Wallet Management</h2>
+        <form id="kycForm">
+            <h4>KYC Verification</h4>
+            <div class="form-group">
+                <label for="idCardFront">ID Card Front</label>
+                <input type="file" class="form-control" id="idCardFront" required>
+            </div>
+            <div class="form-group">
+                <label for="idCardBack">ID Card Back</label>
+                <input type="file" class="form-control" id="idCardBack" required>
+            </div>
+            <div class="form-group">
+                <label for="faceVideo">Face Recognition Video</label>
+                <input type="file" class="form-control" id="faceVideo" accept="video/*" capture="camera" required>
+            </div>
+            <h4>Withdrawal Account Details</h4>
+            <div class="form-group">
+                <label for="walletType">Select Wallet Type</label>
+                <select class="form-control" id="walletType" required>
+                    <option value="">Select</option>
+                    <option value="usdt">USDT</option>
+                    <option value="solana">Solana</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="walletAddress">Wallet Address</label>
+                <input type="text" class="form-control" id="walletAddress" placeholder="Enter wallet address" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="submitKycForm()">Submit</button>
+        </form>
+        <div id="verificationMessage" class="hidden">
+            <div class="timer" id="timer"></div>
+            <p class="text-center mt-3">Your verification is in process. Please wait...</p>
+        </div>
+    </div>
+
+    <script>
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(() => {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    alert('Congratulations, you are verified and can now withdraw your money.');
+                }
+            }, 1000);
+        }
+
+        function submitKycForm() {
+            const form = document.getElementById('kycForm');
+            if (form.checkValidity()) {
+                form.classList.add('hidden');
+                document.getElementById('verificationMessage').classList.remove('hidden');
+
+                const timerDisplay = document.getElementById('timer');
+                startTimer(15 * 60, timerDisplay); // 15 minutes in seconds
+            } else {
+                form.reportValidity();
+            }
+        }
+    </script>
+</body>
+
+</html>

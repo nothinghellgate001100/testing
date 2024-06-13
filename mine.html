@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f8ffae 0%, #43c6ac 100%);
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .profile-header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .profile-header h2 {
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .balance-card {
+            background-color: #e6ffee;
+            border-left: 5px solid #28a745;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .balance-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .balance-card h4 {
+            margin: 0;
+            color: #333;
+        }
+
+        .balance-card p {
+            margin: 0;
+            color: #666;
+        }
+
+        .card-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card-group .card {
+            flex: 0 0 48%;
+            margin-bottom: 20px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-container .btn {
+            margin-top: 10px;
+        }
+
+        @media (max-width: 576px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .btn-container .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .card-group .card {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="profile-header">
+            <img src="profile-pic.jpg" alt="Profile Picture" id="profilePicture">
+            <div>
+                <h2>John Doe</h2>
+                <div class="btn-container">
+                    <button class="btn btn-primary" onclick="uploadPicture()">Change Picture</button>
+                    <button class="btn btn-danger" onclick="deletePicture()">Delete Picture</button>
+                </div>
+                <input type="file" id="uploadInput" style="display: none;" onchange="updatePicture(event)">
+            </div>
+        </div>
+        <div class="card-group">
+            <div class="card balance-card">
+                <div class="card-body">
+                    <h4>Total Account Balance</h4>
+                    <p>$1200</p>
+                </div>
+            </div>
+            <div class="card balance-card">
+                <div class="card-body">
+                    <h4>Total Earnings</h4>
+                    <p>$800</p>
+                </div>
+            </div>
+            <div class="card balance-card">
+                <div class="card-body">
+                    <h4>Total Withdrawals</h4>
+                    <p>$500</p>
+                </div>
+            </div>
+            <div class="card balance-card">
+                <div class="card-body">
+                    <h4>Total Pending</h4>
+                    <p>$300</p>
+                </div>
+            </div>
+            <div class="card balance-card">
+                <div class="card-body">
+                    <h4>Today's Completed Tasks</h4>
+                    <p>15</p>
+                </div>
+            </div>
+            <div class="card balance-card">
+                <div class="card-body">
+                    <h4>Plenty Fine</h4>
+                    <p>$20</p>
+                </div>
+            </div>
+            <div class="card balance-card">
+                <div class="card-body">
+                    <h4>Total Deposited Money</h4>
+                    <p>$1000</p>
+                </div>
+            </div>
+            <div class="card balance-card">
+                <div class="card-body">
+                    <h4>Total Submitted Orders</h4>
+                    <p>25</p>
+                </div>
+            </div>
+            <div class="card balance-card">
+                <div class="card-body">
+                    <h4>Remaining Orders for Premium</h4>
+                    <p>5</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function uploadPicture() {
+            document.getElementById('uploadInput').click();
+        }
+
+        function deletePicture() {
+            document.getElementById('profilePicture').src = 'default-pic.jpg';
+        }
+
+        function updatePicture(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('profilePicture').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+
+</html>

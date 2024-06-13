@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f9;
+        }
+        .card {
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card img {
+            width: 50px;
+            height: 50px;
+        }
+        .card-header {
+            font-size: 1.2em;
+        }
+        .card-title {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .card-text {
+            margin-top: 10px;
+        }
+        .balance-section {
+            margin-bottom: 20px;
+        }
+        .balance-title {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .balance-amount {
+            font-size: 1.5em;
+            color: #17a2b8;
+        }
+        .info-card {
+            margin-bottom: 20px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .info-item {
+            text-align: center;
+        }
+        .info-value {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #17a2b8;
+        }
+        .info-label {
+            font-size: 0.9em;
+        }
+        .action-button {
+            margin-bottom: 20px;
+        }
+        .hint {
+            margin-top: 20px;
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .hint p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu" class="container">
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card" onclick="showDetails('amazon')">
+                    <div class="card-header bg-primary text-white">VIP 1</div>
+                    <div class="card-body text-center">
+                        <img src="amazon.png" alt="Amazon" class="card-img-top">
+                        <h5 class="card-title">Amazon</h5>
+                        <p class="card-text">Available balance: 303.77 USDT<br>Commissions: 10%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" onclick="showDetails('alibaba')">
+                    <div class="card-header bg-warning text-white">VIP 2</div>
+                    <div class="card-body text-center">
+                        <img src="alibaba.png" alt="Alibaba" class="card-img-top">
+                        <h5 class="card-title">Alibaba</h5>
+                        <p class="card-text">Available balance: 1500 USDT<br>Commissions: 8%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" onclick="showDetails('aliexpress')">
+                    <div class="card-header bg-danger text-white">VIP 3</div>
+                    <div class="card-body text-center">
+                        <img src="aliexpress.png" alt="AliExpress" class="card-img-top">
+                        <h5 class="card-title">AliExpress</h5>
+                        <p class="card-text">Available balance: ≥899 USDT<br>Commissions: 12%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="details" class="container d-none">
+        <button class="btn btn-secondary mb-3" onclick="hideDetails()">Back</button>
+        <div id="details-content" class="card p-3"></div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showDetails(platform) {
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('details').classList.remove('d-none');
+
+            let content = '';
+
+            if (platform === 'amazon') {
+                content = `
+                    <div class="balance-section">
+                        <div class="balance-title">Account Balance:</div>
+                        <div class="balance-amount">303.77 USDT</div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-row">
+                            <div class="info-item">
+                                <div class="info-value">1</div>
+                                <div class="info-label">Today's Times</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-value">3.77 USDT</div>
+                                <div class="info-label">Today's commission</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <div class="info-value">0 USDT</div>
+                                <div class="info-label">Cash gap between tasks</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-value">0 USDT</div>
+                                <div class="info-label">Yesterday's buy commission</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <div class="info-value">0 USDT</div>
+                                <div class="info-label">Yesterday's team commission</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-value">0 USDT</div>
+                                <div class="info-label">Money frozen in accounts</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success action-button" onclick="showOrderModal()">Grab the order immediately</button>
+
+                    <div class="hint">
+                        <p>Hint:</p>
+                        <p>1: 5% of the amount of completed transactions earned.</p>
+                        <p>2: The system sends tasks randomly. Complete them as soon as possible after matching them, so as to avoid hanging all the time.</p>
+                    </div>
+                `;
+            } else if (platform === 'alibaba') {
+                content = `
+                    <h2>Alibaba</h2>
+                    <p>Account Balance: 1500 USDT</p>
+                    <p>Today's Times: 15</p>
+                    <p>Today's Commission: 120 USDT</p>
+                    <button class="btn btn-success action-button" onclick="showOrderModal()">Grab the order immediately</button>
+                    <div class="hint">
+                        <p>Hint:</p>
+                        <ul>
+                            <li>5% of the amount of completed transactions earned.</li>
+                            <li>The system sends tasks randomly. Complete them as soon as possible after matching them, so as to avoid hanging all the time.</li>
+                        </ul>
+                    </div>
+                `;
+            } else if (platform === 'aliexpress') {
+                content = `
+                    <div class="balance-section">
+                        <div class="balance-title">Account Balance:</div>
+                        <div class="balance-amount">2785.75 USDT</div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-row">
+                            <div class="info-item">
+                                <div class="info-value">25</div>
+                                <div class="info-label">Today's Times</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-value">1543.75 USDT</div>
+                                <div class="info-label">Today's commission</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <div class="info-value">0 USDT</div>
+                                <div class="info-label">Cash gap between tasks</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-value">0 USDT</div>
+                                <div class="info-label">Yesterday's buy commission</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <div class="info-value">0 USDT</div>
+                                <div class="info-label">Yesterday's team commission</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-value">0 USDT</div>
+                                <div class="info-label">Money frozen in accounts</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success action-button" onclick="showOrderModal()">Grab the order immediately</button>
+
+                    <div class="hint">
+                        <p>Hint:</p>
+                        <p>1: 5% of the amount of completed transactions earned.</p>
+                        <p>2: The system sends tasks randomly. Complete them as soon as possible after matching them, so as to avoid hanging all the time.</p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('details-content').innerHTML = content;
+        }
+
+        function hideDetails() {
+            document.getElementById('menu').style.display = 'flex';
+            document.getElementById('details').classList.add('d-none');
+        }
+
+        function showOrderModal() {
+            $(#showOrderModal).modal('show');
+        }
+    </script>
+</body>
+</html>

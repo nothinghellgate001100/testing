@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+            margin: 0;
+        }
+
+        .modal {
+            background-color: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background-color: #f5f5f5;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .modal-header h5 {
+            margin: 0;
+        }
+
+        .modal-header .close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 16px;
+            text-align: center;
+        }
+
+        .order-number {
+            color: #bd0a6b;
+            font-weight: bold;
+        }
+
+        .order-details img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-top: 10px;
+        }
+
+        .order-details p {
+            margin: 5px 0;
+        }
+
+        .modal-footer {
+            background-color: #f5f5f5;
+            padding: 16px;
+            text-align: center;
+            border-top: 1px solid #dddddd;
+        }
+
+        .btn-submit {
+            background-color: #7b5e38;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="modal">
+        <div class="modal-header">
+            <h5>Successful order</h5>
+            <button class="close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p class="order-number">Order Nos: 985188554642563072</p>
+            <div class="order-details">
+                <img src="https://via.placeholder.com/50" alt="Product Image">
+                <p>TURBO Kipas Angin Dinding 16" Dual Blade CFR 5889 - Wall Fan TORNADO</p>
+                <p>56.59 x3</p>
+            </div>
+            <p>Transaction time: 2024-06-11 11:27:35</p>
+            <p>Order amount: 169.77USDT</p>
+            <p>Commissions: 6.79USDT</p>
+            <p class="font-weight-bold">Expected income: <span style="color: #e67e22;">176.56USDT</span></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-submit">Submit order</button>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            document.querySelector('.modal').style.display = 'none';
+        }
+    </script>
+
+</body>
+
+</html>

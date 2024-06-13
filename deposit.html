@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .wallet-address {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .wallet-address input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .wallet-address button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Deposit</h2>
+        <form id="depositForm">
+            <div class="form-group">
+                <label for="depositMethod">Select Deposit Method</label>
+                <select class="form-control" id="depositMethod" required>
+                    <option value="">Select</option>
+                    <option value="usdt">USDT</option>
+                    <option value="solana">Solana</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="depositAmount">Amount</label>
+                <input type="number" class="form-control" id="depositAmount" placeholder="Enter amount" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="generateWalletAddress()">Generate Wallet Address</button>
+        </form>
+        <div class="wallet-address hidden" id="walletAddressSection">
+            <input type="text" id="walletAddress" readonly>
+            <button onclick="copyToClipboard()">Copy</button>
+        </div>
+    </div>
+
+    <script>
+        function generateWalletAddress() {
+            const depositMethod = document.getElementById('depositMethod').value;
+            const depositAmount = document.getElementById('depositAmount').value;
+
+            if (!depositMethod || !depositAmount) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            document.getElementById('walletAddressSection').classList.add('hidden');
+
+            setTimeout(() => {
+                let walletAddress = '';
+                if (depositMethod === 'usdt') {
+                    walletAddress = 'USDT_WALLET_ADDRESS';
+                } else if (depositMethod === 'solana') {
+                    walletAddress = 'SOLANA_WALLET_ADDRESS';
+                }
+
+                document.getElementById('walletAddress').value = walletAddress;
+                document.getElementById('walletAddressSection').classList.remove('hidden');
+
+                // Record pending payment
+                const record = {
+                    method: depositMethod,
+                    amount: depositAmount,
+                    address: walletAddress,
+                    status: 'pending'
+                };
+                localStorage.setItem('pendingPayment', JSON.stringify(record));
+            }, 3000);
+        }
+
+        function copyToClipboard() {
+            const walletAddress = document.getElementById('walletAddress');
+            walletAddress.select();
+            document.execCommand('copy');
+            alert('Wallet address copied to clipboard.');
+        }
+    </script>
+</body>
+
+</html>

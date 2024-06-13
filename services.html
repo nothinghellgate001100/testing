@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            width: 300px;
+            height: 200px;
+            margin: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .box:nth-child(odd) {
+            background-color: #6ab04c;
+            /* Green */
+        }
+
+        .box:nth-child(even) {
+            background-color: #3489eb;
+            /* Blue */
+        }
+
+        .box h2 {
+            margin: 0;
+            padding: 10px;
+            color: white;
+        }
+
+        .box p {
+            margin: 0;
+            color: white;
+            padding: 0 20px;
+        }
+
+        @media (max-width: 768px) {
+            .box {
+                width: calc(100% - 40px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box" onclick="window.location.href='https://t.me/jutt79'">
+            <h2>Customer Service</h2>
+            <p>Need assistance? Click here to chat with us on Telegram!</p>
+            <p>Our customer service team is available 24/7 to assist you.</p>
+        </div>
+        <div class="box">
+            <h2>About Us</h2>
+            <p>Learn more about our company and what we do.</p>
+            <p>We strive to provide the best service and products to our customers.</p>
+        </div>
+    </div>
+</body>
+
+</html>
